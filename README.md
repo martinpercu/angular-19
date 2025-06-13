@@ -140,12 +140,57 @@ To this:
 
 ## 05-Cumulative-Layout-Shift-NgOptimizedImage
 
+- In the product-detail.components.ts import "NgOptimizedImage".
+```sh
+import { NgOptimizedImage } from '@angular/common';
+```
 - In product-detail.components.html we have [src]="cover()" to get the image.
 ```sh
   [src]="cover()"
 ```
-to get the image.
+- Change for:
+```sh
+  [ngSrc]="cover()"
+  width="68"
+  height="68"
+```
+Is important to give a size to keep this size from the beginning.
 
+BUT this is OK only for the carrousel. Because is not responsive.
+The main picture in this case we use "fill n true
 
+- From this:
+```sh
+<div class="w-full rounded border border-gray-200">
+  <img
+    alt="ecommerce"
+    class="w-full object-cover object-center"
+    [src]="cover()" />
+</div>
+```
+- Change for:
+```sh
+<div class="w-full rounded border border-gray-200">
+  <div class="relative h-80">
+    <img
+      alt="ecommerce"
+      [fill]="true"
+      class="w-full object-cover object-center"
+      [ngSrc]="cover()" />
+  </div>
+</div>
+```
+Here we add a "father with class relative and we add the high in 80rem
 
-
+- In the product.component.html we have almost the same. The main difference is we will have a lot of images. So we will add "loading="lazy" to render in the lazy way. Lik this
+```sh
+ <div class="relative h-36 sm:h-60 md:h-48">
+  <img
+    [ngSrc]="product.images[0]"
+    [alt]="product.title"
+    [fill]="true"
+    loading="lazy"
+    class="h-full w-full object-cover object-center group-hover:opacity-75" />
+</div>
+```
+- With this will load the image when need it.
