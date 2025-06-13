@@ -128,7 +128,13 @@ To this:
   {{ dataProduct.title }}
 }
 ```
-
+- In header.component.html ... is the same but in this case with the "cart()" signal.
+```sh
+@let dataCart = cart();
+@if(dataCart){
+  {{ dataCart.length }}
+}
+```
 
 
 
