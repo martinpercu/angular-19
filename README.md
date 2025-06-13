@@ -116,6 +116,7 @@ ng build -c development
 ## 04-Local-vars
 
 - In product-detail.components.html we have the "product()" signal several times. To make only on time the signal computation we will create a local var "@let dataProduct = product();" to compute once and use this var "dataProduct" to render the component. Then an @if to avoid the '?' every time.
+
 From this:
 ```sh
       {{ product()?.title }}
@@ -137,6 +138,13 @@ To this:
 ```
 
 
+## 05-Cumulative-Layout-Shift-NgOptimizedImage
+
+- In product-detail.components.html we have [src]="cover()" to get the image.
+```sh
+  [src]="cover()"
+```
+to get the image.
 
 
 
