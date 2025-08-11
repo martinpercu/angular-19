@@ -41,4 +41,31 @@ npm i prettier-eslint eslint-config-prettier eslint-plugin-prettier -dev
 
 
 
+## 02-Environments-dev-prod
+
+- Angular will create 2 environments by default dev and prod run this:
+```sh
+ng generate environments
+```
+- This will create a folder environments with 2 files environments.ts & environments.development.ts
+- In environments.development.ts wi will add in const environment the vars for development like this:
+```sh
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:3000',
+};
+```
+- For easy import the environments add "@environments/*": ["./src/environments/*"]
+in the tsconfig.json. Now with a line like this (using @environments):
+```sh
+import { environment } from '@environments/environment';
+```
+- Check the category.service.ts and product.service.ts to see the imports.
+
+
+
+
+
+
+
 
