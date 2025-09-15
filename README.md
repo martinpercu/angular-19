@@ -63,6 +63,56 @@ import { environment } from '@environments/environment';
 - Check the category.service.ts and product.service.ts to see the imports.
 
 
+## 03-Environment-staging
+
+- Create a new environment.staging.ts in the environment folder. Ths will be something n the middle between dev and prod.
+```sh
+export const environment = {
+  production: true,
+  apiUrl: 'https://staging-api.escuelas.co',
+};
+```
+- To use this environment wi need to modify manually the "angular.json" .
+- In the angular.json find "projects==>store==>architect==>build==>configuration" there there are "production" and "developer". We must add "staging" and copy the "fileReplacements" from the "developer" and change the line starting with "with". ==> something like this
+```sh
+"staging": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ]
+            },
+```
+- In angular.json make the same but now in "projects==>store==>architect==>serve==>configuration"
+```sh
+"serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "store:build:production"
+            },
+            "staging": {
+              "buildTarget": "store:build:staging"
+            },
+            "development": {
+              "buildTarget": "store:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+```
+
+- To run or build differents environments
+```sh
+ng serve -c staging
+ng build -c development
+```
+- Remember by default serve is development and build is production. This is the logic we found in the angular.json
+
+
+
+
 
 
 
