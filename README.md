@@ -113,6 +113,28 @@ ng build -c development
 
 
 
+## 04-Local-vars
+
+- In product-detail.components.html we have the "product()" signal several times. To make only on time the signal computation we will create a local var "@let dataProduct = product();" to compute once and use this var "dataProduct" to render the component. Then an @if to avoid the '?' every time.
+From this:
+```sh
+      {{ product()?.title }}
+```
+To this:
+- In product-detail.components.html
+```sh
+@let dataProduct = product();
+@if(dataProduct){
+  {{ dataProduct.title }}
+}
+```
+- In header.component.html ... is the same but in this case with the "cart()" signal.
+```sh
+@let dataCart = cart();
+@if(dataCart){
+  {{ dataCart.length }}
+}
+```
 
 
 
